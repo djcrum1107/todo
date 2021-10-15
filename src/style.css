@@ -1,0 +1,17 @@
+body {
+    display: grid;
+    grid-template-rows: 10% 85% 5%;
+}
+
+#centerBlock {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+#header {
+    background-color: aliceblue;
+}
+
+#footer {
+    background-color: aliceblue;
+}
