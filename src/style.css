@@ -31,10 +31,14 @@ h2 {
 #navigation {
     grid-area: navigation;
     display: grid;
-    grid-template-rows: minmax(50px, 100px);
+    grid-template-rows: 1fr 5fr 5fr;
     grid-template-columns: 1fr;
+    gap: 5px;
     overflow-y: scroll;
     text-align: center;
+    align-items: center;
+    padding-bottom: 10px;
+    background-color: linen;
 }
 
 #centerContent {
@@ -42,19 +46,23 @@ h2 {
     display: grid;
     overflow-y: scroll;
     background-color: rgb(235, 235, 235);
+    grid-template-rows: repeat(8, 1fr);
 }
 
 .taskSimple {
+    display: grid;
     border: 1px solid black;
     border-radius: 15px;
     margin: 5px 20px;
     padding: 5px 20px;
     background-color: lightgrey;
+    align-items: center;
 }
 
 .taskSimple>p {
     font-size: 12px;
     text-align: right;
+    margin: 0;
 }
 
 .taskDetailed {
@@ -66,6 +74,19 @@ h2 {
 }
 
 .navButton {
+    border: none;
+    text-align: right;;
     margin: 1px 1px;
+    padding-right: 10px;
     width: 95%;
+    border-radius: 5px;
+    background-color: inherit;
+}
+
+.navButton:hover {
+    background-color: rgb(228, 255, 228);
+}
+
+.navButton.selected {
+    background-color: lightblue;
 }
