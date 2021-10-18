@@ -1,17 +1,71 @@
 body {
+    margin: 0;
+    height: 100vh;
     display: grid;
-    grid-template-rows: 10% 85% 5%;
-}
-
-#centerBlock {
-    display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-rows: 2fr 17fr 1fr;
+    grid-template-columns: 3fr 17fr;
+    grid-template-areas: 
+        "header     header"
+        "navigation content"
+        "footer     footer";
 }
 
 #header {
+    grid-area: header;
+    font-size: 10px;
     background-color: aliceblue;
 }
 
 #footer {
+    grid-area: footer;
+    font-size: 8px;
     background-color: aliceblue;
+}
+
+h2 {
+    font-size: 14px;
+    padding: 2px;
+    margin: 0;
+}
+
+#navigation {
+    grid-area: navigation;
+    display: grid;
+    grid-template-rows: minmax(50px, 100px);
+    grid-template-columns: 1fr;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+#centerContent {
+    grid-area: content;
+    display: grid;
+    overflow-y: scroll;
+    background-color: rgb(235, 235, 235);
+}
+
+.taskSimple {
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 5px 20px;
+    padding: 5px 20px;
+    background-color: lightgrey;
+}
+
+.taskSimple>p {
+    font-size: 12px;
+    text-align: right;
+}
+
+.taskDetailed {
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 5px 20px;
+    padding: 5px 20px;
+    background-color: lightgrey;
+}
+
+.navButton {
+    margin: 1px 1px;
+    width: 95%;
 }
