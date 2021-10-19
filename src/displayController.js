@@ -11,7 +11,7 @@ function updateTitle(newListTitle) {
 }
 
 function displayNewTaskInput(){
-    alert('newTask');
+    bodyDiv.querySelector('#inputForm').style.display = "block";
 }
 
 function displayNewProjectinput(){
