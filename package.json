@@ -27,6 +27,7 @@
   "keywords": [],
   "dependencies": {
     "date-fns": "^2.25.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "pubsub-js": "^1.9.3"
   }
 }

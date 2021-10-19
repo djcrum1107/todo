@@ -49,6 +49,14 @@ h2 {
     grid-template-rows: repeat(8, 1fr);
 }
 
+#centerContentHeader {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    width: 95%;
+    margin: 5px 20px;
+    align-content: center;
+}
+
 .taskSimple {
     display: grid;
     border: 1px solid black;

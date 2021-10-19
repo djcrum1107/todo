@@ -1,24 +1,66 @@
-import {task} from './taskController';
+import {addTask} from './displayController';
 
+let bodyDiv = "";
 let navDiv = "";
 let contentDiv = "";
+let listTitle = "";
 
-function collectDivs() {
-    navDiv = document.getElementById('navigation');
-    contentDiv = document.getElementById('centerContent');
+
+function updateTitle(newListTitle) {
+    listTitle.textContent = newListTitle;
 }
 
-function updateTaskDisplay(taskList){
-    taskList.forEach(task => {
-        const addedTask = document.createElement('div');
+function displayNewTaskInput(){
+    alert('newTask');
+}
+
+function displayNewProjectinput(){
+    alert('newProject');
+}
+
+function displayNewFavoriteInput(){
+    alert('newFavorite');
+}
+
+function attachEvents(){
+    const newTaskButton = contentDiv.querySelector('.newTaskButton');
+    newTaskButton.addEventListener('click', displayNewTaskInput);
+    const newProjectButton = navDiv.querySelector('.newProjectButton');
+    newProjectButton.addEventListener('click', displayNewProjectinput);
+    const newFavoriteButton = navDiv.querySelector('.newFavoriteButton');
+    newFavoriteButton.addEventListener('click', displayNewFavoriteInput);
+}
+
+//Initial div collection, potential for optimization here
+function collectDivs() {
+    bodyDiv = document.body;
+    navDiv = bodyDiv.querySelector('#navigation');
+    contentDiv = bodyDiv.querySelector('#centerContent');
+    listTitle = contentDiv.querySelector('#listTitle');
+}
+
+//Add an individual task to the task display
+function addTaskDisplay(task) {
+    const addedTask = document.createElement('div');
         addedTask.classList.add('taskSimple');
         const titleText = document.createElement('p');
         titleText.textContent = task.getTitle();
         addedTask.appendChild(titleText);
         contentDiv.appendChild(addedTask);
+}
+
+//Update the full task list
+function updateTaskDisplay(taskList) {
+    taskList.forEach(task => {
+        addTaskDisplay(task);
     });
 }
 
-collectDivs();
+function initDisplay(){
+   collectDivs(); 
+   attachEvents();
+}
 
-export {updateTaskDisplay};
+initDisplay();
+
+export {addTaskDisplay, updateTaskDisplay, updateTitle};
