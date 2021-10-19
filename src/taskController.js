@@ -44,7 +44,12 @@ const task = (id, title, dueDate = new Date().toLocaleDateString(), repeat = "no
         archived = archivedStatus;
     }
 
-    return {getTaskID, getTitle, setTitle, getDetails, setDetails, getDueDate, setDueDate, repeat, isArchived, setArchived};
+    return {getTaskID, 
+        getTitle, setTitle, 
+        getDetails, setDetails, 
+        getDueDate, setDueDate, 
+        repeat, 
+        isArchived, setArchived};
 };
 
 function addTask(title){

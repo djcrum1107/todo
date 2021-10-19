@@ -1,4 +1,5 @@
-import {addTask, readTasks} from './taskController'
+import {addTask, readTasks} from './taskController';
+import {updateTaskDisplay} from './displayController';
 import './style.css';
 
 function collectNavigation(){
@@ -11,7 +12,7 @@ function initWebsite(){
     addTask('Test');
     addTask('Test');
     addTask('Test');
-    console.log(readTasks());
+    updateTaskDisplay(readTasks());
 }
 
 initWebsite();
