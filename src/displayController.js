@@ -1,4 +1,4 @@
-import {addTask} from './taskController';
+import {addTask, readTasks} from './taskController';
 
 let bodyDiv = "";
 let navDiv = "";
@@ -38,6 +38,16 @@ function displayNewFavoriteInput(){
     alert('newFavorite');
 }
 
+//Archive a task based on the button attached to the display of the task
+function archiveTask(e) {
+    //Pull the parent element based on the button
+    const taskToArchiveDiv = e.target.parentElement;
+    //Pull the task ID from the class assigned on button creation
+    const taskToArchiveID = taskToArchiveDiv.classList[0].split('_')[1];
+    readTasks()[taskToArchiveID].changeArchivedStatus();
+    updateTaskDisplay(readTasks());
+}
+
 function attachEvents(){
     const newTaskButton = contentDiv.querySelector('.newTaskButton');
     newTaskButton.addEventListener('click', displayNewTaskInput);
@@ -62,24 +72,45 @@ function collectDivs() {
 //Add an individual task to the task display
 function addTaskToDisplay(task) {
     console.log("Adding task to display");
-    const addedTask = document.createElement('div');
-        addedTask.classList.add('taskSimple');
+    const addedTaskElement = document.createElement('div');
+        addedTaskElement.classList.add('taskID_' + task.getTaskID());
+        addedTaskElement.classList.add('taskSimple');
         const titleText = document.createElement('p');
         titleText.textContent = task.getTitle();
-        addedTask.appendChild(titleText);
-        contentDiv.appendChild(addedTask);
+        const archiveButton = document.createElement('button');
+        archiveButton.addEventListener('click', archiveTask);
+
+        addedTaskElement.appendChild(titleText);
+        addedTaskElement.appendChild(archiveButton);
+        contentDiv.appendChild(addedTaskElement);
 }
 
-//Update the full task list
+
+
+//Update the full task list excluding those that are archived
 function updateTaskDisplay(taskList) {
+    console.log(taskList);
     taskList.forEach(task => {
-        addTaskToDisplay(task);
+        //Don't show if archived
+        if(task.isArchived()){
+            return;
+        }
+        //If the task isn't there based on taskID class add it, otherwise show if it's hidden
+        const taskDiv = contentDiv.querySelector('.taskID_' + task.getTaskID());
+        if(taskDiv == null) {
+            addTaskToDisplay(task);
+            return;
+        }else {
+            taskDiv.display = 'none';
+        }
+        
     });
 }
 
 function initDisplay(){
    collectDivs(); 
    attachEvents();
+   updateTaskDisplay(readTasks());
 }
 
 export {initDisplay, addTaskToDisplay, updateTaskDisplay, updateTitle};
