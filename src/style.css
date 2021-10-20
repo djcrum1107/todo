@@ -99,16 +99,30 @@ h2 {
     background-color: lightblue;
 }
 
-#inputForm {
+body>form {
     position: fixed; /* Sit on top of the page content */
     display: none; /* Hidden by default */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    width: 90%;
+    height: 40%;
+    top: 100px;
+    left: 5%;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px;
+    padding: 15px;
+    background-color: rgb(255, 251, 251);
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
+    cursor: pointer;
+}
+
+#taskForm {
+    display: inline-block;
+}
+
+input[type=text] {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
 }

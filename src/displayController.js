@@ -10,8 +10,15 @@ function updateTitle(newListTitle) {
     listTitle.textContent = newListTitle;
 }
 
+function cancelForm(event){
+    const formCancelled = event.target.parentElement;
+    formCancelled.reset();
+    formCancelled.style.display = "none";
+}
+
 function displayNewTaskInput(){
-    bodyDiv.querySelector('#inputForm').style.display = "block";
+    const inputForm = bodyDiv.querySelector('#taskForm');
+    inputForm.style.display = "block";
 }
 
 function displayNewProjectinput(){
@@ -29,6 +36,8 @@ function attachEvents(){
     newProjectButton.addEventListener('click', displayNewProjectinput);
     const newFavoriteButton = navDiv.querySelector('.newFavoriteButton');
     newFavoriteButton.addEventListener('click', displayNewFavoriteInput);
+    const cancelFormButton = bodyDiv.querySelector('.cancelFormButton');
+    cancelFormButton.addEventListener('click', cancelForm);
 }
 
 //Initial div collection, potential for optimization here
