@@ -53,7 +53,9 @@ const task = (id, title, dueDate = new Date().toLocaleDateString(), repeat = "no
 };
 
 function addTask(title){
-    taskList.push(task(taskIDCount++, title));
+    const newTask = task(taskIDCount++, title);
+    taskList.push(newTask);
+    return newTask;
 }
 
 function listTask(id){
