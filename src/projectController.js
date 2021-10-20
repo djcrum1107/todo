@@ -2,6 +2,7 @@ import {addTask} from './taskController'
 
 let projectList = [];
 let projectIDCount = 0;
+let activeProject = null;
 
 const project = (id, projectName) => {
     let projectID = id;
@@ -54,8 +55,8 @@ function initProjects() {
     addTaskToProject(addTask("Sample Task"), 0);
 }
 
-function getProjectList(){
+function readProjects(){
     return projectList;
 }
 
-export {initProjects, addProject, addTaskToProject, getProjectList};
+export {initProjects, addProject, addTaskToProject, readProjects};

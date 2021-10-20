@@ -1,4 +1,6 @@
 import {addTask, readTasks} from './taskController';
+import {addProject, readProjects} from './projectController';
+import { forEach } from 'lodash';
 
 let bodyDiv = "";
 let navDiv = "";
@@ -45,6 +47,7 @@ function archiveTask(e) {
     //Pull the task ID from the class assigned on button creation
     const taskToArchiveID = taskToArchiveDiv.classList[0].split('_')[1];
     readTasks()[taskToArchiveID].changeArchivedStatus();
+    taskToArchiveDiv.style.display = 'none';
     updateTaskDisplay(readTasks());
 }
 
@@ -71,7 +74,6 @@ function collectDivs() {
 
 //Add an individual task to the task display
 function addTaskToDisplay(task) {
-    console.log("Adding task to display");
     const addedTaskElement = document.createElement('div');
         addedTaskElement.classList.add('taskID_' + task.getTaskID());
         addedTaskElement.classList.add('taskSimple');
@@ -79,17 +81,14 @@ function addTaskToDisplay(task) {
         titleText.textContent = task.getTitle();
         const archiveButton = document.createElement('button');
         archiveButton.addEventListener('click', archiveTask);
-
         addedTaskElement.appendChild(titleText);
         addedTaskElement.appendChild(archiveButton);
-        contentDiv.appendChild(addedTaskElement);
+        addedTaskElement.style.display = 'inline';
+        contentDiv.appendChild(addedTaskElement);    
 }
-
-
 
 //Update the full task list excluding those that are archived
 function updateTaskDisplay(taskList) {
-    console.log(taskList);
     taskList.forEach(task => {
         //Don't show if archived
         if(task.isArchived()){
@@ -101,9 +100,21 @@ function updateTaskDisplay(taskList) {
             addTaskToDisplay(task);
             return;
         }else {
-            taskDiv.display = 'none';
+            taskDiv.style.display = 'inline';
         }
         
+    });
+}
+
+function addProjectToDisplay(project) {
+    
+}
+
+function updateProjectsDisplay(projectList){
+    projectList.forEach(project => {
+        console.log(project);
+        const projectsDiv = navDiv.querySelector('.projects');
+        addProjectToDisplay(project);
     });
 }
 
@@ -111,6 +122,7 @@ function initDisplay(){
    collectDivs(); 
    attachEvents();
    updateTaskDisplay(readTasks());
+   updateProjectsDisplay(readProjects());
 }
 
 export {initDisplay, addTaskToDisplay, updateTaskDisplay, updateTitle};
