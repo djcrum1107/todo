@@ -1,4 +1,4 @@
-import {addTask} from './displayController';
+import {addTask} from './taskController';
 
 let bodyDiv = "";
 let navDiv = "";
@@ -10,15 +10,24 @@ function updateTitle(newListTitle) {
     listTitle.textContent = newListTitle;
 }
 
-function cancelForm(event){
-    const formCancelled = event.target.parentElement;
+function cancelForm(e){
+    const formCancelled = e.target.parentElement;
     formCancelled.reset();
     formCancelled.style.display = "none";
 }
 
 function displayNewTaskInput(){
     const inputForm = bodyDiv.querySelector('#taskForm');
-    inputForm.style.display = "block";
+    inputForm.style.display = "inline-block";
+}
+
+function confirmAddTask(e){
+    const inputForm = e.target.parentElement;
+    const taskTitle = inputForm.querySelector('#taskTitle').value;
+    const addedTask = addTask(taskTitle);
+    addTaskToDisplay(addedTask);
+    inputForm.reset();
+    inputForm.style.display = "none";
 }
 
 function displayNewProjectinput(){
@@ -38,6 +47,8 @@ function attachEvents(){
     newFavoriteButton.addEventListener('click', displayNewFavoriteInput);
     const cancelFormButton = bodyDiv.querySelector('.cancelFormButton');
     cancelFormButton.addEventListener('click', cancelForm);
+    const addTaskButton = bodyDiv.querySelector('.addTaskButton');
+    addTaskButton.addEventListener('click', confirmAddTask);
 }
 
 //Initial div collection, potential for optimization here
@@ -49,7 +60,8 @@ function collectDivs() {
 }
 
 //Add an individual task to the task display
-function addTaskDisplay(task) {
+function addTaskToDisplay(task) {
+    console.log("Adding task to display");
     const addedTask = document.createElement('div');
         addedTask.classList.add('taskSimple');
         const titleText = document.createElement('p');
@@ -61,7 +73,7 @@ function addTaskDisplay(task) {
 //Update the full task list
 function updateTaskDisplay(taskList) {
     taskList.forEach(task => {
-        addTaskDisplay(task);
+        addTaskToDisplay(task);
     });
 }
 
@@ -70,6 +82,4 @@ function initDisplay(){
    attachEvents();
 }
 
-initDisplay();
-
-export {addTaskDisplay, updateTaskDisplay, updateTitle};
+export {initDisplay, addTaskToDisplay, updateTaskDisplay, updateTitle};

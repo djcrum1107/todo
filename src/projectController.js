@@ -6,6 +6,7 @@ let projectIDCount = 0;
 const project = (id, projectName) => {
     let projectID = id;
     let tasks = [];
+    let favoriteStatus = false;
 
     const getProjectID = () => {
         return projectID;
@@ -13,6 +14,18 @@ const project = (id, projectName) => {
 
     const getProjectName = () => {
         return projectName;
+    }
+
+    const setProjectName = (newProjectName) => {
+        projectName = newProjectName;
+    }
+
+    const isFavorite = () => {
+        return favoriteStatus;
+    }
+
+    const changeFavoriteStatus = () => {
+        favoriteStatus = !favoriteStatus;
     }
 
     const getTaskList = () => {
@@ -23,7 +36,9 @@ const project = (id, projectName) => {
         tasks.push(task);
     }
 
-    return {getProjectID, getProjectName, getTaskList, addTask};
+    return {getProjectID, getProjectName, setProjectName,
+        getTaskList, addTask,
+        isFavorite, changeFavoriteStatus};
 }
 
 function addTaskToProject(task, projectID) {

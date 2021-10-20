@@ -115,10 +115,6 @@ body>form {
     cursor: pointer;
 }
 
-#taskForm {
-    display: inline-block;
-}
-
 input[type=text] {
     width: 100%;
     margin: 5px 0;

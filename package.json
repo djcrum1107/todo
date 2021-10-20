@@ -1,7 +1,7 @@
 {
-  "name": "restaurant",
+  "name": "todo",
   "version": "1.0.0",
-  "description": "The Odin Project Restaurant Page",
+  "description": "The Odin Project ToDo App Page",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/djcrum1107/restaurant.git"
+    "url": "git+https://github.com/djcrum1107/todo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/djcrum1107/restaurant/issues"
+    "url": "https://github.com/djcrum1107/todo/issues"
   },
-  "homepage": "https://github.com/djcrum1107/restaurant#readme",
+  "homepage": "https://github.com/djcrum1107/todo#readme",
   "devDependencies": {
     "css-loader": "^6.4.0",
     "style-loader": "^3.3.0",
