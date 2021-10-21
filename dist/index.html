@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DJ's ToDo App</title>
+  </head>
+  <body>
+    <form id="taskForm">
+      <label for="title">Task Name: </label>
+      <input type="text" id="taskTitle" name="title" defaultvalue="New Task" value="New Task">
+      <input type="button" class="cancelFormButton" value="Cancel">
+      <input type="button" class="addTaskButton" value="Add Task">
+    </form>
+    <form id="projectForm">New Project Form</form>
+    <form id="favoriteForm">New Favorite Form</form>
+    <div id="header">
+      <!--Add an icon either pulled from online or make one-->
+      <h1>DJ's Todo List</h1>
+    </div>
+    <div id="navigation">
+      <h2>Navigation</h2>
+      <div id="favorites"><h2>Favorites</h2>
+          <button class="navButton newFavoriteButton">Add Favorite</button>
+      </div>
+      <div id="projects"><h2>Projects</h2>
+          <button class="navButton newProjectButton">New Project</button>
+      </div>
+    </div>
+    <div id="centerContent">
+      <div id="centerContentHeader">
+        <h2 id='listTitle'>Today's Tasks</h2>
+        <button class="newTaskButton">+</button>
+      </div>
+    </div>
+    <div id="footer">
+      <h3>Made by DJCrum1107 2021</h3>
+    </div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
