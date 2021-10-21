@@ -46,7 +46,7 @@ h2 {
     display: grid;
     overflow-y: scroll;
     background-color: rgb(235, 235, 235);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(6, 1fr);
 }
 
 #centerContentHeader {
