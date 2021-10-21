@@ -102,8 +102,8 @@ function addTaskToDisplay(task) {
         titleText.textContent = task.getTitle();
         const archiveButton = document.createElement('button');
         archiveButton.addEventListener('click', archiveTask);
-        addedTaskElement.appendChild(titleText);
         addedTaskElement.appendChild(archiveButton);
+        addedTaskElement.appendChild(titleText);
         addedTaskElement.style.display = 'grid';
         contentDiv.appendChild(addedTaskElement);    
 }
