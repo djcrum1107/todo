@@ -1,12 +1,10 @@
 import {addTask, readTasks} from './taskController';
-import {addProject, readProjects} from './projectController';
-import { forEach } from 'lodash';
+import {addProject, readProjects, getSelectedProjectTasks} from './projectController';
 
 let bodyDiv = "";
 let navDiv = "";
 let contentDiv = "";
 let listTitle = "";
-
 
 function updateTitle(newListTitle) {
     listTitle.textContent = newListTitle;
@@ -48,7 +46,7 @@ function archiveTask(e) {
     const taskToArchiveID = taskToArchiveDiv.classList[0].split('_')[1];
     readTasks()[taskToArchiveID].changeArchivedStatus();
     taskToArchiveDiv.style.display = 'none';
-    updateTaskDisplay(readTasks());
+    updateTaskDisplay(getSelectedProjectTasks());
 }
 
 function attachEvents(){
@@ -90,15 +88,17 @@ function addTaskToDisplay(task) {
 //Update the full task list excluding those that are archived
 function updateTaskDisplay(taskList) {
     taskList.forEach(task => {
-        //Don't show if archived
-        if(task.isArchived()){
-            return;
-        }
         //If the task isn't there based on taskID class add it, otherwise show if it's hidden
         const taskDiv = contentDiv.querySelector('.taskID_' + task.getTaskID());
-        if(taskDiv == null) {
+        //Don't show if archived
+        if(task.isArchived()){
+            taskDiv.style.display = 'none';
+        }
+        //If the taskDiv wasn't already created, create it
+        else if(taskDiv == null) {
             addTaskToDisplay(task);
             return;
+        //If the taskDiv was already created, show it instead of creating it again
         }else {
             taskDiv.style.display = 'inline';
         }
@@ -106,22 +106,26 @@ function updateTaskDisplay(taskList) {
     });
 }
 
-function addProjectToDisplay(project) {
-    
+function addProjectToDisplay(project, projectsDiv) {
+    const addedProjectElement = document.createElement('button');
+    addedProjectElement.innerText = project.getProjectName();
+    addedProjectElement.classList.add('navButton');
+    //This long function is used to append to the second to last child since trying to use insertBefore() didn't want to work at all. My guess due to hidden whitespace in the HTML I couldn't get rid of.
+    projectsDiv.insertBefore(addedProjectElement, projectsDiv.children[projectsDiv.childElementCount -1]);
+
 }
 
 function updateProjectsDisplay(projectList){
     projectList.forEach(project => {
-        console.log(project);
-        const projectsDiv = navDiv.querySelector('.projects');
-        addProjectToDisplay(project);
+        const projectsDiv = navDiv.querySelector('#projects');
+        addProjectToDisplay(project, projectsDiv);
     });
 }
 
 function initDisplay(){
    collectDivs(); 
    attachEvents();
-   updateTaskDisplay(readTasks());
+   updateTaskDisplay(getSelectedProjectTasks());
    updateProjectsDisplay(readProjects());
 }
 

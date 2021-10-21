@@ -2,7 +2,7 @@ import {addTask} from './taskController'
 
 let projectList = [];
 let projectIDCount = 0;
-let activeProject = null;
+let selectedProjectID = null;
 
 const project = (id, projectName) => {
     let projectID = id;
@@ -47,16 +47,35 @@ function addTaskToProject(task, projectID) {
 }
 
 function addProject(projectName) {
-    projectList.push(project(projectIDCount++, projectName));
+    selectedProjectID = projectIDCount;
+    const projectToAdd = project(projectIDCount++, projectName)
+    projectList.push(projectToAdd);
 }
 
 function initProjects() {
-    addProject("Inbox");
-    addTaskToProject(addTask("Sample Task"), 0);
+    addProject("First Project");
+    addProject("Second Project");
+    addTaskToProject(addTask("Sample Task 1"), 0);
+    addTaskToProject(addTask("Sample Task 2"), 0);
+    addTaskToProject(addTask("Sample Task 3"), 1);
+    addTaskToProject(addTask("Sample Task 4"), 1);
 }
 
 function readProjects(){
     return projectList;
 }
 
-export {initProjects, addProject, addTaskToProject, readProjects};
+function getSelectedProjectID() {
+    return selectedProjectID;
+}
+
+function setSelectedProjectID(newSelectedProjectID){
+    selectedProjectID = newSelectedProjectID;
+}
+
+function getSelectedProjectTasks() {
+    return projectList[selectedProjectID].getTaskList();
+}
+
+export {initProjects, addProject, addTaskToProject, readProjects,
+    getSelectedProjectTasks, getSelectedProjectID, setSelectedProjectID};
