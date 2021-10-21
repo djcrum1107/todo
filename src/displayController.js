@@ -1,5 +1,5 @@
 import {addTask, readTasks} from './taskController';
-import {addProject, readProjects, getSelectedProjectTasks} from './projectController';
+import {addProject, readProjects, getSelectedProjectTasks, getSelectedProjectID} from './projectController';
 
 let bodyDiv = "";
 let navDiv = "";
@@ -47,6 +47,11 @@ function archiveTask(e) {
     readTasks()[taskToArchiveID].changeArchivedStatus();
     taskToArchiveDiv.style.display = 'none';
     updateTaskDisplay(getSelectedProjectTasks());
+}
+
+function navigateWithButton(e) {
+    const navigationSection = e.target.parentElement.id;
+    console.log(navigationSection);
 }
 
 function attachEvents(){
@@ -110,12 +115,16 @@ function addProjectToDisplay(project, projectsDiv) {
     const addedProjectElement = document.createElement('button');
     addedProjectElement.innerText = project.getProjectName();
     addedProjectElement.classList.add('navButton');
+    addedProjectElement.classList.add('projectID_' + project.getProjectID());
+    addedProjectElement.addEventListener('click', navigateWithButton);
     //This long function is used to append to the second to last child since trying to use insertBefore() didn't want to work at all. My guess due to hidden whitespace in the HTML I couldn't get rid of.
     projectsDiv.insertBefore(addedProjectElement, projectsDiv.children[projectsDiv.childElementCount -1]);
 
 }
 
 function updateProjectsDisplay(projectList){
+    const currentProjectName = projectList[getSelectedProjectID()].getProjectName();
+    updateTitle(currentProjectName);
     projectList.forEach(project => {
         const projectsDiv = navDiv.querySelector('#projects');
         addProjectToDisplay(project, projectsDiv);
